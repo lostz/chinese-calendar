@@ -19,7 +19,5 @@ jobs:
         run: |
           echo "RELEASE_NAME=Released on $(date +%Y%m%d%H%M)" >> $GITHUB_ENV
           echo "TAG_NAME=$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
-          sudo apt-get update
-          sudo apt-get -y install python3-pip
-          pip3 install -r requirements.txt
+          pip3 install -r chinese-calendar/requirements.txt
         shell: bash
