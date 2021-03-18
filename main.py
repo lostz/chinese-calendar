@@ -1,5 +1,6 @@
 from datetime import datetime
 import time
+from random import sample
 import requests
 iCal = """BEGIN:VCALENDAR
 METHOD:PUBLISH
@@ -9,7 +10,8 @@ PRODID:-//Apple Inc.//macOS 11.2.3//EN
 X-APPLE-CALENDAR-COLOR:#711A76
 X-WR-TIMEZONE:Asia/Shanghai"""
 
-
+uid_generate = lambda: "-".join(map(lambda l: ''.join(sample("0123456789ABCDEF", l)), [8, 4, 4, 4, 12]))
+runtime = datetime.now().strftime('%Y%m%dT%H%M%SZ')
 def get_events_in_year(days,envents):
     for day in days:
         date = time.strftime("%Y%m%d",time.strptime(day['date'],"%Y-%m-%d"))
@@ -20,10 +22,14 @@ def get_events_in_year(days,envents):
             name = name+"调休"
         singleEvent =f"""
 BEGIN:VEVENT
-DTSTART;VALUE=DATE:{date}
-DTEND;VALUE=DATE:{date}
+DTEND;TZID=Asia/Shanghai:{date}
+UID:{uid_generate()}
+DTSTAMP:{runtime}
+URL;VALUE=URI:
+X-APPLE-TRAVEL-ADVISORY-BEHAVIOR:AUTOMATIC
 SUMMARY:{name}
-SEQUENCE:0
+CREATED:{runtime}
+DTSTART;TZID=Asia/Shanghai:{date}
 END:VEVENT"""
         envents.append(singleEvent)
     return envents
