@@ -5,7 +5,7 @@ import requests
 iCal = """BEGIN:VCALENDAR
 METHOD:PUBLISH
 VERSION:2.0
-X-WR-CALNAME:中国节假日
+X-WR-CALNAME:中国节假日与调休
 PRODID:-//Apple Inc.//macOS 11.2.3//EN
 X-APPLE-CALENDAR-COLOR:#711A76
 X-WR-TIMEZONE:Asia/Shanghai"""
